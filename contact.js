@@ -24,6 +24,8 @@ const loadContact = () => {
     return contacts;
 }
 
+
+//Fungsi untuk menampilkan List Contact
 const listContact = () => {
     const contacts = loadContact();
     console.log('Contact List: ');
@@ -32,6 +34,23 @@ const listContact = () => {
     });
 }
 
+//Fungsi untuk menampilkan detail data contact berdasarkan nama
+const detailContact = (name) => {
+    const contacts = loadContact();
+    const findContact = contacts.find((contact) => contact.name === name);
+    // console.log(findContact);
+    //Pengkodisian apabila data contact ditemukan
+    if (findContact) {
+        console.log(findContact.name);
+        console.log(findContact.email);
+        console.log(findContact.mobile);
+    } else {    //Apabila data contact tidak ditemukan
+        console.log('Data tida ditemukan!');
+        return false;
+    }
+}
+
+//Fungsi untuk menghapus data contact berdasarkan nama
 
 //Fungsi untuk menyimpan data contact
 const saveContact = (name, email, mobile) => {
@@ -42,7 +61,7 @@ const saveContact = (name, email, mobile) => {
     const contacts = loadContact();
 
     //Variabel untuk menemukan isi name yang sama pada array
-    const duplicateName = contacts.find(contact => contact.name === name);
+    const duplicateName = contacts.find((contact) => contact.name === name);
     //Variabel untuk memvalidasi email dengan NPM Validator
     const vldEmail = validator.isEmail(contact.email);
     //Variabel untuk memvalidasi nomor telepon dengan NPM Validator
@@ -75,10 +94,7 @@ const saveContact = (name, email, mobile) => {
         console.log('Data name yang dimasukkan sudah ada!');
         return false;
     };
-
-    // rl.close();
 };
 
 //Export module dari contact.js
-// module.exports = {questions, saveContact};
-module.exports = {listContact, saveContact};
+module.exports = {listContact, detailContact, saveContact};

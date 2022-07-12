@@ -40,22 +40,24 @@ yargs.command({
     },
 });
 
+//Menampilkan Detail Contact berdasarkan nama
+yargs.command({
+    command: 'detail',
+    describe: 'see detail contact base on name',
+    builder:{
+        name:{
+            describe: 'Contact Name',
+            demandOption: true,
+            type: 'string',
+        },
+    },
+    handler(argv){
+        contacts.detailContact(argv.name);
+    },
+    
+});
+
+//Menghapus data Contact berdasarkan nama
+
+
 yargs.parse();
-
-
-
-//File System
-// const fs = require('fs');
-
-//Import semua fungsi dari contact.js
-//const contacts = require('./contact.js');
-
-//const main = async () => {
-    // const name = await contact.questions('What is your name? ');
-    // const mobile = await contact.questions('What is your name? ');
-
-    // contacts.saveContact(name, mobile);
-// };
-
-//Menjalankan fungsi main
-//main();
