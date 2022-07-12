@@ -61,7 +61,6 @@ const deleteContact = (name) => {
         var newContacts = contacts.filter((contact) => contact.name !== name);
         // console.log(newContacts);
         //Menyimpan array data contact yang baru ke file contact.json
-        contacts.push(newContacts);
         fs.writeFileSync('data/contacts.json', JSON.stringify(newContacts));
         // console.log(contacts);
         console.log(`Data contact dengan nama: ${name} telah dihapus!`);
