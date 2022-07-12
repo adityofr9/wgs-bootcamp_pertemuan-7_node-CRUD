@@ -24,7 +24,6 @@ const loadContact = () => {
     return contacts;
 }
 
-
 //Fungsi untuk menampilkan List Contact
 const listContact = () => {
     const contacts = loadContact();
@@ -45,12 +44,33 @@ const detailContact = (name) => {
         console.log(findContact.email);
         console.log(findContact.mobile);
     } else {    //Apabila data contact tidak ditemukan
-        console.log('Data tida ditemukan!');
+        console.log('Data tidak ditemukan!');
         return false;
     }
 }
 
 //Fungsi untuk menghapus data contact berdasarkan nama
+const deleteContact = (name) => {
+    const contacts = loadContact();
+    // console.log(contacts);
+    //Mencari data contact berdasarkan nama
+    const findContact = contacts.find((contact) => contact.name === name);
+    //Pengkondisian apabila data contact ditemukan berdasarkan nama
+    if (findContact) {
+        //Membuat array baru dengan filter tanpa data contact yang berdasarkan nama
+        var newContacts = contacts.filter((contact) => contact.name !== name);
+        // console.log(newContacts);
+        //Menyimpan array data contact yang baru ke file contact.json
+        contacts.push(newContacts);
+        fs.writeFileSync('data/contacts.json', JSON.stringify(newContacts));
+        // console.log(contacts);
+        console.log(`Data contact dengan nama: ${name} telah dihapus!`);
+    } else {    //Apabila data contact tidak ditemukan
+        console.log('Data yang akan dihapus tidak ditemukan!');
+        return false;
+    }
+
+}
 
 //Fungsi untuk menyimpan data contact
 const saveContact = (name, email, mobile) => {
@@ -97,4 +117,4 @@ const saveContact = (name, email, mobile) => {
 };
 
 //Export module dari contact.js
-module.exports = {listContact, detailContact, saveContact};
+module.exports = {listContact, detailContact, deleteContact, saveContact};
